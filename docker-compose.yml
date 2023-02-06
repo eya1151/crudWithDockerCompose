@@ -1,0 +1,25 @@
+version: '3.0'
+services:
+  api:
+    build: ./nest/
+    container_name: api
+    ports:
+      - "3700:3700"
+    command: npm start  
+    environment:
+      MONGO_URI: mongodb+srv://crud:crud@cluster0.tusof8o.mongodb.net/?retryWrites=true&w=majority
+    volumes:
+      - "./nest/:/app"  
+      - "/app/node_modules"
+
+  web:
+    build: ./client/
+    container_name: web
+    ports:
+      - "3000:3000"
+    command: npm start  
+    volumes:
+      - "./client/:/app"  
+      - "/app/node_modules"
+  
+  
